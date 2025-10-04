@@ -2,6 +2,7 @@ package ra.com.service;
 
 
 
+import ra.com.dto.request.ProductRequestCreateDTO;
 import ra.com.model.Product;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 public interface ProductService {
     List<Product> findAll();
     Product findById(String id);
-    boolean create(Product product);
-    boolean update(Product product);
+    boolean create(ProductRequestCreateDTO productDto);
+    boolean update(ProductRequestCreateDTO productDto);
     boolean delete(String productId);
 }

@@ -16,7 +16,7 @@ public class ProductRepositoryImp implements ProductRepository {
     private EntityManager entityManager;
     @Override
     public List<Product> findAll() {
-        return entityManager.createQuery("from Product ", Product.class).getResultList();
+        return entityManager.createQuery("from Product", Product.class).getResultList();
     }
 
     @Override
@@ -29,29 +29,14 @@ public class ProductRepositoryImp implements ProductRepository {
     @Transactional
     public boolean create(Product product) {
         try {
-            product.setProductId(generateProductId());
             entityManager.persist(product);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
     }
 
-    private String generateProductId() {
-        try {
-            String lastId = entityManager.createQuery(
-                    "SELECT p.productId FROM Product p ORDER BY p.productId DESC",
-                    String.class
-            ).setMaxResults(1).getSingleResult();
-
-            int number = Integer.parseInt(lastId.substring(1));
-            return String.format("P%04d", number + 1);
-        } catch (NoResultException e) {
-            // Bảng rỗng
-            return "P0001";
-        }
-    }
 
     @Override
     @Transactional

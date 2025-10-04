@@ -17,20 +17,26 @@
     <thead>
     <tr>
         <th>No</th>
-        <th>ProductId</th>
-        <th>Price</th>
+        <th>Product ID</th>
         <th>Product Name</th>
+        <th>Price</th>
+        <th>Image</th>
+        <th>Created</th>
+        <th>Catalog</th>
         <th>Status</th>
         <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${listProduct}" var="product" varStatus="loop">
+    <c:forEach items="${listProducts}" var="product" varStatus="loop">
         <tr>
             <td>${loop.index+1}</td>
             <td>${product.productId}</td>
-            <td>${product.price}</td>
             <td>${product.productName}</td>
+            <td>${product.price}</td>
+            <td><img src="${product.image}" width="100" height="100" alt="${product.productName}"/></td>
+            <td>${product.created}</td>
+            <td>${product.catalog.catalogName}</td>
             <td>${product.status?"Active":"Inactive"}</td>
             <td>
                 <a href="<%=request.getContextPath()%>/productController/initUpdate?productId=${product.productId}">Update</a>
